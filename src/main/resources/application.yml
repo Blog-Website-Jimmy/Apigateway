@@ -16,6 +16,10 @@ spring:
           uri: ${BLOG_SERVICE}
           predicates:
             - Path=/article/**, /author/**, /category/**, /Images/**
+        - id: notification-service
+          uri: ${NOTIFICATION_SERVICE}
+          predicates:
+            - Path=/telegram/**
   config:
     import: optional:file:.env[.properties]
   application:
@@ -40,3 +44,8 @@ management:
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+logs:
+  application:
+    loki:
+      base-url: ${LOKI_BASE_URL}
